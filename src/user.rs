@@ -11,12 +11,13 @@ struct User {
 
 pub fn get_file_path() -> std::string::String{
     let mut home: String = std::env::var("HOME").expect("Couldn't fetch your HOME directory variable");
-    let fullpath = format!("{}/.curtain", home);
+    let mut fullpath = format!("{}/.curtain", home);
+    fullpath.push_str("/user.json");
     fullpath
 }
 
 
-pub fn user(){
+pub fn create_user_profile(){
     let mut username: String = String::new();
     let mut emoji: String = String::new();
     let mut link: String = String::new();
@@ -52,4 +53,6 @@ pub fn make_file(content: String){
     let files_path = format!("{}/user.json", path);
     std::fs::write(&files_path, content).expect("Some error occured while creating the file!");
 }
+
+
 
