@@ -8,6 +8,9 @@ pub struct User {
     pub emoji: char,
     pub link: String,
 }
+// I KID YOU NOT, I DIDN'T KNOW THAT THE VARIABLES INSIDE a struct had to public as well (includue
+// sob emoji here) this is such a sad moment as I wasted 30 mins of my life debugging this small
+// mistake of mine 
 
 pub fn get_dir_path() -> std::string::String{
     let home: String = std::env::var("HOME").expect("Couldn't fetch your HOME directory variable");
