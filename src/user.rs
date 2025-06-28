@@ -10,19 +10,21 @@ struct User {
 }
 
 pub fn get_file_path() -> std::string::String{
-    let mut home: String = std::env::var("HOME").expect("Couldn't fetch your HOME directory variable");
-    let mut fullpath = format!("{}/.curtain", home);
+    let home: String = std::env::var("HOME").expect("Couldn't fetch your HOME directory variable");
+    let fullpath = format!("{}/.curtain", home);
     fullpath
 }
 pub fn make_file(content: String){
-    let mut path = get_file_path().to_string();
+    let path = get_file_path().to_string();
+    // println!("{}", path); WAS USED FOR DEBUGGING THIS SHITTY ERROR 
     std::fs::create_dir_all(&path).expect("Some error happened while creating the directory");
     let full_path = format!("{}/user.json", path); 
     std::fs::write(&full_path, content).expect("Some error occured while creating the file!");
 }
 
 pub fn read_file(){
-    let file_path = format!("{}/user.json", get_file_path());
+    let file_pathh = get_file_path().to_string();
+    let file_path = format!("{}/user.json", file_pathh);
     let content_in_json = std::fs::read_to_string(file_path).unwrap();
     let user: User = serde_json::from_str(&content_in_json).unwrap();
     println!("[{} {}]'s link is {}", user.emoji, user.username, user.link);
