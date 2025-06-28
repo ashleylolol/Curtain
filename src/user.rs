@@ -12,10 +12,22 @@ struct User {
 pub fn get_file_path() -> std::string::String{
     let mut home: String = std::env::var("HOME").expect("Couldn't fetch your HOME directory variable");
     let mut fullpath = format!("{}/.curtain", home);
-    fullpath.push_str("/user.json");
     fullpath
 }
+pub fn make_file(content: String){
+    let mut path = get_file_path().to_string();
+    std::fs::create_dir_all(&path).expect("Some error happened while creating the directory");
+    let full_path = format!("{}/user.json", path); 
+    std::fs::write(&full_path, content).expect("Some error occured while creating the file!");
+}
 
+pub fn read_file(){
+    let file_path = format!("{}/user.json", get_file_path());
+    let content_in_json = std::fs::read_to_string(file_path).unwrap();
+    let user: User = serde_json::from_str(&content_in_json).unwrap();
+    println!("[{} {}]'s link is {}", user.emoji, user.username, user.link);
+    
+}
 
 pub fn create_user_profile(){
     let mut username: String = String::new();
@@ -45,13 +57,6 @@ pub fn create_user_profile(){
     println!("{}", get_file_path());
     make_file(to_json);
     println!("Done generating your file!")
-}
-
-pub fn make_file(content: String){
-    let path = get_file_path();
-    std::fs::create_dir_all(&path).expect("Some error happened while creating the directory");
-    let files_path = format!("{}/user.json", path);
-    std::fs::write(&files_path, content).expect("Some error occured while creating the file!");
 }
 
 
