@@ -1,3 +1,6 @@
+// I think I need to do better error handling, and probably start working on other features. 
+// I have wasted 3 days just to get the User system working (include sob emoji here)
+// Rust really is hard for a beginner like me ;_;
 use std::path::Path;
 pub mod user;
 
