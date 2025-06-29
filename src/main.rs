@@ -22,6 +22,6 @@ fn main(){
     println!("Enter your post here: ");
     io::stdin().read_line(&mut user_input).expect("Some random goofy error occured.");
     let user_input = user_input.trim().to_string();
-    let post: Post = posts::create_posts(user_input);
+    let post = posts::create_posts(user_input);
     println!("Post: {:?}", post);
 }
