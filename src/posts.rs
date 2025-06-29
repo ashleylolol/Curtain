@@ -6,7 +6,7 @@ pub struct Post{
     pub timestamp: chrono::DateTime<Utc>,
 }
 
-pub fn create_posts(content: String){
+pub fn create_posts(content: String) -> Post{
     Post{
         content,
         timestamp: Utc::now(),

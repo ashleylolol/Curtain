@@ -5,6 +5,7 @@ use std::path::Path;
 use std::io;
 pub mod user;
 mod posts;
+use crate::posts::Post;
 fn main(){
     let dir_path = user::get_dir_path().to_string();
     let file_path = format!("{}/user.json", dir_path).to_string();
@@ -18,6 +19,9 @@ fn main(){
     }
     // user::read_file();
     let mut user_input: String = String::new();
-    io::stdin().read_file(&mut user_input).expect("Some random goofy error occured.");
-    posts::create_posts(user_input);
+    println!("Enter your post here: ");
+    io::stdin().read_line(&mut user_input).expect("Some random goofy error occured.");
+    let user_input = user_input.trim().to_string();
+    let post: Post = posts::create_posts(user_input);
+    println!("Post: {:?}", post);
 }
